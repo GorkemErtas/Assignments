@@ -1,0 +1,12 @@
+SELECT ename, sal FROM emp WHERE sal > (SELECT sal FROM emp WHERE empno = 7566);
+SELECT empno, ename FROM emp WHERE sal > (SELECT AVG(sal) FROM emp);
+SELECT ename FROM emp WHERE empno IN (SELECT DISTINCT mgr FROM emp WHERE mgr IS NOT NULL);
+SELECT ename, sal FROM emp WHERE sal > ALL (SELECT AVG(sal) FROM emp GROUP BY deptno);
+SELECT ename, job FROM emp WHERE job <> 'CLERK' AND sal < ANY (SELECT sal FROM emp WHERE job = 'CLERK');
+INSERT INTO dept VALUES (50, 'SOFTWARE', 'ISTANBUL');
+INSERT INTO emp (ename, empno, hiredate) VALUES ('EMPLOYEE1', 1234, CURRENT_DATE());
+INSERT INTO bonus (ename, job, sal, comm) SELECT ename, job, sal, comm FROM emp WHERE comm IS NOT NULL;
+UPDATE dept SET loc = 'IZMIR' WHERE dname = 'SOFTWARE';
+UPDATE emp SET sal = sal * 1.1;
+DELETE FROM emp WHERE empno = 1234;
+DELETE FROM dept WHERE deptno NOT IN (SELECT DISTINCT deptno FROM emp);
